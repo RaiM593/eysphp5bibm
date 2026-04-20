@@ -30,8 +30,13 @@ jobs:
           echo ".env.example no existe, se omite"
         fi
 
-    - name: Install Dependencies
-      run: composer install --no-interaction --prefer-dist --optimize-autoloader
+    - name: Install Dependencies (optional)
+      run: |
+        if [ -f composer.json ]; then
+          composer install --no-interaction --prefer-dist --optimize-autoloader
+        else
+          echo "No hay composer.json, se omite"
+        fi
 
     - name: Generate key (optional)
       run: |
